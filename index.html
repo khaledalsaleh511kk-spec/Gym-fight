@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>تنبيه النظام 😈</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#050505;color:#eee;font-family:Arial,sans-serif;min-height:100vh;display:grid;place-items:center;overflow:hidden}
+  .box{width:min(92%,520px);text-align:center}
+  h1{font-size:28px;margin:0 0 14px;color:#ff3b30}
+  p{color:#aaa;margin:8px 0 24px}
+  .bar{height:18px;border:1px solid #555;border-radius:10px;overflow:hidden;background:#171717}
+  .fill{height:100%;width:0;background:#fff;transition:width .25s}
+  #percent{font-size:22px;margin-top:14px}
+  #status{margin-top:12px;color:#aaa;min-height:24px}
+  .done{display:none;color:#63ff8b;font-size:24px;margin-top:20px}
+  small{display:block;color:#555;margin-top:28px}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1 id="title">⚠️ تهيئة الجهاز</h1>
+  <p id="msg">يرجى الانتظار…</p>
+  <div class="bar"><div class="fill" id="fill"></div></div>
+  <div id="percent">0%</div>
+  <div id="status">جاري تجهيز العملية...</div>
+  <div class="done" id="done">😂 انخدعت! ما صار أي شيء بجهازك.</div>
+  <small>محاكاة آمنة — لا يتم حذف أو تعديل أي بيانات.</small>
+</div>
+
+<script>
+let n=0;
+const fill=document.getElementById('fill');
+const percent=document.getElementById('percent');
+const status=document.getElementById('status');
+const done=document.getElementById('done');
+const steps=[
+ "جاري فحص النظام...",
+ "جاري تهيئة الذاكرة...",
+ "جاري حذف الملفات... 😈",
+ "جاري إعادة تشغيل النظام...",
+ "آخر خطوة..."
+];
+const timer=setInterval(()=>{
+  n += Math.floor(Math.random()*9)+3;
+  if(n>=100)n=100;
+  fill.style.width=n+"%";
+  percent.textContent=n+"%";
+  status.textContent=steps[Math.min(Math.floor(n/20),4)];
+  if(n===100){
+    clearInterval(timer);
+    setTimeout(()=>{
+      document.getElementById('title').textContent="🎉 مفاجأة!";
+      document.getElementById('msg').textContent="كان مجرد مقلب 😎";
+      status.textContent="";
+      done.style.display="block";
+    },700);
+  }
+},350);
+</script>
+</body>
+</html>
