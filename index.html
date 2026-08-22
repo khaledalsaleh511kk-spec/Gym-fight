@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>تحذير النظام</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #050505;
+  color: white;
+  font-family: Arial, sans-serif;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 92%;
+  max-width: 550px;
+  text-align: center;
+
+  background: #101010;
+  border: 1px solid #292929;
+  border-radius: 24px;
+
+  padding: 45px 20px;
+
+  box-shadow: 0 0 50px rgba(255,0,0,.18);
+}
+
+.warning {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  color: #ff3030;
+  font-size: 28px;
+  margin-bottom: 35px;
+}
+
+/* الكلام الكبير في النص */
+
+#status {
+  font-size: 36px;
+  font-weight: bold;
+  color: #ff3333;
+
+  margin: 35px 0;
+
+  animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .65;
+  }
+}
+
+/* شريط التقدم */
+
+.progress-box {
+  width: 100%;
+  height: 22px;
+
+  background: #292929;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  margin: 35px 0 12px;
+}
+
+#progress {
+  width: 0%;
+  height: 100%;
+
+  background: #ff3030;
+
+  transition: width .4s;
+}
+
+#number {
+  color: #aaa;
+  font-size: 20px;
+}
+
+.small {
+  color: #777;
+  font-size: 14px;
+
+  margin-top: 30px;
+}
+
+/* النهاية */
+
+#result {
+  display: none;
+}
+
+#result .laugh {
+  font-size: 70px;
+}
+
+#result h2 {
+  color: #42ff68;
+  font-size: 34px;
+}
+
+#result p {
+  font-size: 20px;
+  line-height: 1.7;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <div id="screen">
+
+    <div class="warning">⚠️</div>
+
+    <h1>تحذير النظام</h1>
+
+    <div id="status">
+      جاري فرمته الجوال
+    </div>
+
+    <div class="progress-box">
+      <div id="progress"></div>
+    </div>
+
+    <div id="number">
+      0%
+    </div>
+
+    <div class="small">
+      لا تغلق الصفحة...
+    </div>
+
+  </div>
+
+
+  <div id="result">
+
+    <div class="laugh">
+      😂
+    </div>
+
+    <h2>
+      انضحك عليك!
+    </h2>
+
+    <p>
+      كانت مجرد مزحة 😎
+    </p>
+
+    <p>
+      جوالك بخير ❤️<br>
+      لم يتم حذف أو تغيير أي شيء.
+    </p>
+
+  </div>
+
+</div>
+
+
+<script>
+
+let percent = 0;
+
+const progress =
+  document.getElementById("progress");
+
+const number =
+  document.getElementById("number");
+
+const status =
+  document.getElementById("status");
+
+
+const timer = setInterval(() => {
+
+  // سرعة أبطأ
+  percent += Math.floor(Math.random() * 3) + 1;
+
+  if (percent >= 100) {
+    percent = 100;
+  }
+
+  progress.style.width =
+    percent + "%";
+
+  number.textContent =
+    percent + "%";
+
+
+  if (percent >= 70 && percent < 90) {
+
+    status.textContent =
+      "جاري فرمته الجوال...";
+
+  }
+
+
+  if (percent >= 90 && percent < 100) {
+
+    status.textContent =
+      "جاري فرمته الجوال... 😱";
+
+  }
+
+
+  if (percent === 100) {
+
+    clearInterval(timer);
+
+    status.textContent =
+      "اكتملت العملية!";
+
+    setTimeout(() => {
+
+      document.getElementById("screen")
+        .style.display = "none";
+
+      document.getElementById("result")
+        .style.display = "block";
+
+    }, 1500);
+
+  }
+
+}, 500);
+
+</script>
+
+</body>
+  </html>
